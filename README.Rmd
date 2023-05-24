@@ -1,0 +1,70 @@
+---
+title: "Report"
+author: "Riccardo Pagan"
+date: "2023-05-24"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+```{r}
+library(tidyverse)
+library(psych)
+library(DataExplorer)
+library(performance)
+library(ggplot2)
+```
+
+First I made sure I was in the right directory
+```{r comment=""}
+setwd("/Users/riccardopagan/Desktop/MyProject/Data")
+getwd()
+```
+
+Then I merged all my .csv files in a unique dataframe
+```{r}
+MyData <- read.csv2("308.csv")
+len <- nrow(MyData)
+IDcol <- rep(308, len)
+MyData$ID <- IDcol #adding ID columns 
+
+subjects <- c("309", "310", "330", "331", "332", "333", "334", "335", "337", "349", "350", "351", "352", "369", "370", "371", "372")
+
+
+for(i in subjects) {
+  fname <- paste(i, sep = ".", "csv")
+  nfile <- read.csv2(fname)
+  len <- nrow(nfile)
+  IDcol <- rep(i, len)
+  nfile$ID <- IDcol
+  MyData <- merge(MyData, nfile, by=c("Reaction", "Days", "ID"), all=TRUE)
+}
+```
+
+I ordered my new dataframe by ID and Days
+```{r}
+MyData <- arrange(MyData, ID, Days) 
+```
+
+With the merged dataset, I started exploring it.
+```{r}
+describe(MyData)
+plot_intro(MyData)
+plot_histogram(MyData$Reaction)
+```
+
+After this I started with the true analysis, specifically a linear regression model with days of 
+sleep deprivation as predictor. 
+```{r}
+m1 <- lm (Reaction~Days, data=MyData)
+```
+And before checking the significance of the model, I visual checked the various assumptions of the model.
+```{r}
+check_model(m1)
+```
+
+Finally I checked the significance of the model
+```{r}
+summary(m1)
+```
