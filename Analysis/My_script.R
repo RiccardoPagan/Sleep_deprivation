@@ -1,8 +1,10 @@
+library(tidyverse)
+library(ggplot2)
+
 # ensuring that my working directory was right
-setwd("/Users/riccardopagan/Desktop/MyProject/Data")
+setwd("/Users/riccardopagan/Desktop/Sleep_deprivation/Data")
 getwd()
 
-library(tidyverse)
 
 MyData <- read.csv2("308.csv")
 len <- nrow(MyData)
@@ -21,3 +23,18 @@ for(i in subjects) {
   MyData <- merge(MyData, nfile, by=c("Reaction", "Days", "ID"), all=TRUE)
 }
 
+MyData <- arrange(MyData, ID, Days) 
+
+describe(MyData)
+plot_intro(MyData)
+plot_histogram(MyData$Reaction)
+
+m1 <- lm (Reaction~Days, data=MyData)
+
+check_model(m1)
+
+summary(m1)
+
+
+ggplot(MyData, aes(x=Days, y=Reaction)) + geom_point() + geom_smooth(method = "lm")
+ggplot(MyData, aes(x=Days, y=Reaction, color=ID)) + geom_point() + geom_line()
