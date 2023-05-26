@@ -1,5 +1,9 @@
-library(tidyverse)
+#library(tidyverse)
 library(ggplot2)
+library(LabRS)
+#library(psych)
+#library(DataExplorer)
+library(performance)
 
 # ensuring that my working directory was right
 setwd("/Users/riccardopagan/Desktop/Sleep_deprivation/Data")
@@ -23,18 +27,19 @@ for(i in subjects) {
   MyData <- merge(MyData, nfile, by=c("Reaction", "Days", "ID"), all=TRUE)
 }
 
-MyData <- arrange(MyData, ID, Days) 
+MyDatas <- arrange(MyData, ID, Days) 
+expdata(MyDatas, file = "BigData.csv")
 
-describe(MyData)
-plot_intro(MyData)
-plot_histogram(MyData$Reaction)
+#describe(MyDatas)
+#plot_intro(MyDatas)
+#plot_histogram(MyDatas$Reaction)
 
-m1 <- lm (Reaction~Days, data=MyData)
+m1 <- lm (Reaction~Days, data=MyDatas)
 
 check_model(m1)
 
 summary(m1)
 
 
-ggplot(MyData, aes(x=Days, y=Reaction)) + geom_point() + geom_smooth(method = "lm")
-ggplot(MyData, aes(x=Days, y=Reaction, color=ID)) + geom_point() + geom_line()
+ggplot(MyDatas, aes(x=Days, y=Reaction)) + geom_point() + geom_smooth(method = "lm")
+ggplot(MyDatas, aes(x=Days, y=Reaction, color=ID)) + geom_point() + geom_line()

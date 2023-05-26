@@ -1,0 +1,7 @@
+name|type|data|command|depend|seed|path|time|size|bytes|format|repository|iteration|parent|children|seconds|warnings|error
+check|stem|d49206836cb69a1d|1f5799de4f8474c8|08017fdf1cc05b3d|-1218088854||t19502.3750153293s|01429daa00651fc3|107023|rds|local|vector|||0.192||
+lm_fit|stem|4433c4f6c1be843d|63298c481d6cd4c8|b2da950d5257e5dd|-1812269390||t19502.3750129314s|2521c3caa9fc21e8|50690|rds|local|vector|||0.005||
+m1|stem|691d63f5f3e342fc|0853eef2e51f60b9|48e3a527ec1d4749|-324215237||t19502.3750119505s|e7adba7acc8489c8|5385|rds|local|vector|||0.006||
+MyData|stem|2b0d82ab9d7083e5|3d9796279d02a78a|f843ea125792374d|-2005652994||t19502.3750117796s|70f723019ea17af6|1480|rds|local|vector|||0.003||
+plot_evol|stem|c0ce8ca968091d24|371fc46cd4b51666|4fa9ee98378481ab|-1898901908||t19502.3750124844s|3fcc8e3901f1db26|46380|rds|local|vector|||0.018||
+rawfilename|stem|78652f69a7da3419|740270de16db4270|ef46db3751d8e999|-1306670411|BigData.csv|t19502.3551894221s|3e1b9f961dc0e14b|3056|file|local|vector|||0.197||
